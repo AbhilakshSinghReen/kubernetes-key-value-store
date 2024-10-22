@@ -5,7 +5,7 @@ from huey import RedisHuey
 from .redis_client import redis_client
 
 
-redis_host = "localhost" # environ["REDIS_HOST"]
+redis_host = environ["REDIS_HOST"]
 
 huey = RedisHuey('entrypoint', host=redis_host)
 
