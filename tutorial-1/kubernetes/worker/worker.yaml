@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: key-value-store-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: key-value-store-worker
+      component: key-value-store-worker
+  template:
+    metadata:
+      labels:
+        app: key-value-store-worker
+        component: key-value-store-worker
+    spec:
+      containers:
+      - name: key-value-store-worker
+        image: your-docker-hub-username/k8s-key-value-store-worker:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        envFrom:
+        - configMapRef:
+            name: key-value-store-redis-config
