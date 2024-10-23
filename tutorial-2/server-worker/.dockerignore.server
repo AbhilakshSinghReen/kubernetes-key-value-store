@@ -1,0 +1,7 @@
+**/__pycache__
+
+.dockerignore.server
+.dockerignore.worker
+docker_build_worker.sh
+Dockerfile.worker
+requirements.worker.txt

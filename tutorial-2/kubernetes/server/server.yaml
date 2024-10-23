@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: key-value-store-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: key-value-store-server
+      component: key-value-store-server
+  template:
+    metadata:
+      labels:
+        app: key-value-store-server
+        component: key-value-store-server
+    spec:
+      containers:
+      - name: key-value-store-server
+        image: your-docker-hub-username/k8s-key-value-store-server:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        envFrom:
+        - configMapRef:
+            name: key-value-store-redis-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: key-value-store-server-service
+spec:
+  selector:
+    app: key-value-store-server
+    component: key-value-store-server
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

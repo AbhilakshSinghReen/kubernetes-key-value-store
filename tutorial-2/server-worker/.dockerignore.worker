@@ -1,0 +1,10 @@
+**/__pycache__
+
+.dockerignore.server
+.dockerignore.worker
+docker_build_server.sh
+Dockerfile.server
+requirements.server.txt
+
+src/app.py
+src/models.py
